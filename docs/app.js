@@ -12,6 +12,7 @@ const detail = document.querySelector("#detail-content");
 const pageSize = 12;
 
 const categories = [
+  { label: "가공식품", icon: "prepared", featured: true },
   { label: "전체", icon: "grid" },
   { label: "들기름", image: "perilla-photo.webp" },
   { label: "참기름", image: "sesame-photo.webp" },
@@ -21,6 +22,7 @@ const categories = [
 ];
 
 const categoryPaths = {
+  prepared: "M5 12a7 7 0 0 0 14 0H5z M3 12h18 M9 20h6 M9 4c-2 2 2 3 0 5 M15 4c-2 2 2 3 0 5",
   grid: "M4 4h6v6H4z M14 4h6v6h-6z M4 14h6v6H4z M14 14h6v6h-6z",
   package: "m4 8 8-4 8 4v8l-8 4-8-4z M4 8l8 4 8-4 M12 12v8 M8 6l8 4"
 };
@@ -40,12 +42,16 @@ function canonical(text) {
     .replaceAll("고추가루", "고춧가루").replaceAll("국내산", "국산");
 }
 
+function categoryLabel(product) {
+  return product.kind ? product.category + " · " + product.kind : product.category;
+}
+
 function makeCard(product) {
   const card = element("article", "", "product-card");
   const meta = element("div", "", "card-meta");
   const arrow = element("span", "↗", "card-arrow");
   arrow.setAttribute("aria-hidden", "true");
-  meta.append(element("span", product.category), arrow);
+  meta.append(element("span", categoryLabel(product)), arrow);
   const heading = element("h3");
   const button = element("button", product.name, "card-title");
   button.type = "button";
@@ -53,10 +59,12 @@ function makeCard(product) {
   button.setAttribute("aria-haspopup", "dialog");
   heading.append(button);
   const bottom = element("div", "", "card-bottom");
-  const ingredientSummary = product.ingredients.map(([name, , amount]) =>
-    product.ingredients.length === 1 ? [name, amount].join(" ") : name
-  ).join(" · ");
-  bottom.append(element("span", "원재료"), element("strong", "국산 " + ingredientSummary));
+  const ingredientSummary = product.ingredients.length > 3
+    ? "국산 " + product.ingredients.length + "종"
+    : "국산 " + product.ingredients.map(([name, , amount]) =>
+      product.ingredients.length === 1 && amount ? name + " " + amount : name
+    ).join(" · ");
+  bottom.append(element("span", "원재료"), element("strong", ingredientSummary));
   card.append(meta, heading, element("p", [product.maker, product.size].join(" · "), "card-maker"), bottom);
   return card;
 }
@@ -65,7 +73,7 @@ function render() {
   const terms = query.value.trim().split(/\s+/).filter(Boolean).map(canonical);
   const matches = products.filter(product => {
     if (category !== "전체" && product.category !== category) return false;
-    const words = canonical([product.name, product.maker, product.size, product.category, ...product.ingredients.flat()].join(" "));
+    const words = canonical([product.name, product.maker, product.size, categoryLabel(product), ...product.ingredients.flat()].join(" "));
     return terms.every(term => words.includes(term));
   });
   results.replaceChildren(...matches.slice(0, visible).map(makeCard));
@@ -93,10 +101,10 @@ function showDetail(product) {
   const body = table.createTBody();
   for (const ingredient of product.ingredients) {
     const tr = body.insertRow();
-    for (const value of ingredient) tr.append(element("td", value));
+    for (const value of ingredient) tr.append(element("td", value ?? "미표시"));
   }
 
-  document.querySelector("#detail-category").textContent = product.category;
+  document.querySelector("#detail-category").textContent = categoryLabel(product);
   const title = element("h2", product.name, "detail-title");
   title.id = "detail-title";
   if (product.category === "세트") table.createCaption().textContent = "함량은 구성품별 표시를 기준으로 합니다.";
@@ -144,6 +152,7 @@ for (const item of categories) {
   const { label } = item;
   const button = element("button", "", "filter");
   button.append(categoryVisual(item), element("span", label, "filter-label"));
+  if (item.featured) button.classList.add("filter-featured");
   button.setAttribute("aria-controls", "products");
   button.type = "button";
   button.setAttribute("aria-pressed", String(label === category));
