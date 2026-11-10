@@ -12,21 +12,7 @@ const dialog = document.querySelector("#details");
 const detail = document.querySelector("#detail-content");
 const pageSize = 12;
 
-const categories = [
-  { label: "가공식품", icon: "prepared", featured: true },
-  { label: "전체", icon: "grid" },
-  { label: "들기름", image: "perilla-photo.webp" },
-  { label: "참기름", image: "sesame-photo.webp" },
-  { label: "고춧가루", image: "chili-photo.webp" },
-  { label: "깨·가루", image: "seeds-photo.webp" },
-  { label: "세트", icon: "package" }
-];
-
-const categoryPaths = {
-  prepared: "M5 12a7 7 0 0 0 14 0H5z M3 12h18 M9 20h6 M9 4c-2 2 2 3 0 5 M15 4c-2 2 2 3 0 5",
-  grid: "M4 4h6v6H4z M14 4h6v6h-6z M4 14h6v6H4z M14 14h6v6h-6z",
-  package: "m4 8 8-4 8 4v8l-8 4-8-4z M4 8l8 4 8-4 M12 12v8 M8 6l8 4"
-};
+const categories = ["가공식품", "전체", "들기름", "참기름", "고춧가루", "깨·가루", "세트"];
 
 let category = "가공식품";
 let visible = pageSize;
@@ -55,33 +41,31 @@ function productSize(product) {
   return product.coupangSize ?? product.size;
 }
 
-function makeCard(product) {
+function productImage(product, className, lazy = false) {
+  const frame = element("div", "", className);
+  const image = element("img");
+  image.alt = "";
+  image.width = 212;
+  image.height = 212;
+  image.loading = lazy ? "lazy" : "eager";
+  image.decoding = "async";
+  image.addEventListener("error", () => frame.remove(), { once: true });
+  image.src = product.thumbnail;
+  frame.append(image);
+  return frame;
+}
+
+function makeCard(product, index) {
   const card = element("article", "", "product-card");
-  const meta = element("div", "", "card-meta");
-  const arrow = element("span", "↗", "card-arrow");
-  arrow.setAttribute("aria-hidden", "true");
-  meta.append(element("span", categoryLabel(product)), arrow);
+  if (product.thumbnail) card.append(productImage(product, "card-photo", index >= 4));
   const heading = element("h3");
   const button = element("button", product.name, "card-title");
   button.type = "button";
   button.dataset.product = product.id;
   button.setAttribute("aria-haspopup", "dialog");
   heading.append(button);
-  const content = element("div", "", "card-content");
-  content.append(meta, heading, element("p", [product.maker, productSize(product)].join(" · "), "card-maker"));
-  const lead = element("div", "", "card-lead");
-  if (product.thumbnail) {
-    const image = element("img", "", "card-thumbnail");
-    image.alt = "";
-    image.width = 212;
-    image.height = 212;
-    image.loading = "lazy";
-    image.decoding = "async";
-    image.addEventListener("error", () => image.remove(), { once: true });
-    image.src = product.thumbnail;
-    lead.append(image);
-  }
-  lead.append(content);
+  const specs = element("p", "", "card-specs");
+  specs.append(element("span", product.maker), element("span", productSize(product)));
   const bottom = element("div", "", "card-bottom");
   const ingredientSummary = product.ingredients.length > 3
     ? "국산 " + product.ingredients.length + "종"
@@ -89,7 +73,7 @@ function makeCard(product) {
       product.ingredients.length === 1 && amount ? name + " " + amount : name
     ).join(" · ");
   bottom.append(element("span", "원재료"), element("strong", ingredientSummary));
-  card.append(lead, bottom);
+  card.append(element("p", product.kind ?? product.category, "card-kind"), heading, specs, bottom);
   return card;
 }
 
@@ -160,7 +144,6 @@ function showDetail(product) {
     for (const value of ingredient) tr.append(element("td", value ?? "미표시"));
   }
 
-  document.querySelector("#detail-category").textContent = categoryLabel(product);
   const title = element("h2", product.name, "detail-title");
   title.id = "detail-title";
   if (product.category === "세트") table.createCaption().textContent = "함량은 구성품별 표시를 기준으로 합니다.";
@@ -181,45 +164,27 @@ function showDetail(product) {
     const sourceLabel = product.coupangSize ? product.source + "에서 " + product.size + " 보기" : product.source + "에서 보기";
     links.append(makeLink(sourceLabel, product.url, purchases.length ? "outline" : "primary"));
   }
-  detail.replaceChildren(
-    title,
-    ...(coupangPurchase ? [element("p", "이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.", "affiliate-note")] : []),
-    element("p", [product.maker, productSize(product)].join(" · "), "detail-meta"),
-    element("h3", "원재료와 원산지", "detail-heading"), table, evidence,
-    element("h3", "구매처", "detail-heading"), links,
+  const overview = element("div", "", "detail-overview");
+  if (product.thumbnail) overview.append(productImage(product, "detail-photo"));
+  const summary = element("div", "", "detail-summary");
+  summary.append(element("p", categoryLabel(product), "detail-category"), title,
+    element("p", [product.maker, productSize(product)].join(" · "), "detail-meta"));
+  overview.append(summary);
+  const facts = element("section", "", "detail-facts");
+  facts.append(element("h3", "원재료와 원산지", "detail-heading"), table, evidence);
+  const buy = element("section", "", "detail-purchase");
+  buy.append(element("h3", "구매처", "detail-heading"),
+    ...(coupangPurchase ? [element("p", "이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.", "affiliate-note")] : []), links,
     ...(copy ? [element("p", "앱 안에서 쿠팡이 열리지 않으면 링크를 복사해 웹 브라우저에서 열어 보세요.", "link-note"), copy.address, copy.status] : []),
     element("p", "가격과 판매 상태는 구매처에서 확인할 수 있습니다.", "link-note")
   );
+  detail.replaceChildren(overview, facts, buy);
   dialog.showModal();
   dialog.scrollTop = 0;
 }
 
-function categoryVisual({ image, icon }) {
-  const visual = element("span", "", "filter-visual");
-  visual.setAttribute("aria-hidden", "true");
-  if (image) {
-    const img = document.createElement("img");
-    img.src = "./assets/" + image;
-    img.width = 48;
-    img.height = 48;
-    img.alt = "";
-    visual.append(img);
-  } else {
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("viewBox", "0 0 24 24");
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", categoryPaths[icon]);
-    svg.append(path);
-    visual.append(svg);
-  }
-  return visual;
-}
-
-for (const item of categories) {
-  const { label } = item;
-  const button = element("button", "", "filter");
-  button.append(categoryVisual(item), element("span", label, "filter-label"));
-  if (item.featured) button.classList.add("filter-featured");
+for (const label of categories) {
+  const button = element("button", label, "filter");
   button.setAttribute("aria-controls", "products");
   button.type = "button";
   button.setAttribute("aria-pressed", String(label === category));

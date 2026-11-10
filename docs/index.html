@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="국산 재료로 만든 식품을 원재료표와 구매처까지 확인할 수 있는 장보기 아카이브.">
-  <meta name="theme-color" content="#f7f8f4">
+  <meta name="theme-color" content="#f8f7f2">
   <meta property="og:title" content="착한 음식 아카이브">
   <meta property="og:description" content="국산 원재료가 확인된 식품의 라벨과 구매처를 한곳에.">
   <title>착한 음식 아카이브</title>
   <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
-  <link rel="stylesheet" href="./styles.css?v=4">
+  <link rel="stylesheet" href="./styles.css?v=6">
   <script src="./products.js?v=5" defer></script>
-  <script src="./app.js?v=4" defer></script>
+  <script src="./app.js?v=6" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#catalog">상품 목록 바로가기</a>
@@ -28,31 +28,32 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main>
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <h1 id="hero-title">국산 재료로 만든<br>가공식품 찾기</h1>
-        <p class="hero-summary">쿠팡에서 판매하는 가공식품의 원재료표와 구매 옵션을 확인하세요.</p>
+      <div class="wrap hero-inner">
+        <div>
+          <h1 id="hero-title">국산 원재료로 만든 가공식품</h1>
+          <p class="hero-summary">상품을 골라 원재료별 원산지와 구매처를 확인하세요.</p>
+        </div>
         <form class="search" role="search">
-          <label for="query" class="sr-only">상품명 또는 원재료 검색</label>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.75"/><path d="m15 15 4 4"/></svg>
-          <input id="query" type="search" placeholder="상품명, 제조사, 원재료 검색" autocomplete="off" enterkeyhint="search" aria-controls="products">
+          <label for="query">아카이브 검색</label>
+          <div class="search-field">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.75"/><path d="m15 15 4 4"/></svg>
+            <input id="query" type="search" placeholder="상품명, 제조사, 원재료" autocomplete="off" enterkeyhint="search" aria-controls="products">
+          </div>
         </form>
       </div>
-      <figure class="hero-art">
-        <img src="./assets/pantry-photo.webp" width="1280" height="853" alt="" fetchpriority="high">
-      </figure>
     </section>
 
-    <section id="catalog" class="catalog" aria-labelledby="catalog-title">
+    <section id="catalog" class="wrap catalog" aria-labelledby="catalog-title">
       <div class="section-heading">
-        <h2 id="catalog-title" tabindex="-1">상품 둘러보기</h2>
+        <h2 id="catalog-title" tabindex="-1">상품 목록</h2>
+        <p id="count" class="results-count" role="status"></p>
       </div>
-      <p class="catalog-disclosure">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
       <div class="filters" role="group" aria-label="상품 분류" id="filters"></div>
       <div class="catalog-options">
-        <p id="count" class="results-count" role="status"></p>
         <label class="retailer-filter"><input id="coupang-only" type="checkbox" aria-controls="products" checked>쿠팡 상품만 보기</label>
+        <p class="catalog-disclosure">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
       </div>
       <div id="products" class="product-grid"></div>
       <p id="empty" class="empty" hidden>검색 결과가 없습니다. 다른 상품명이나 원재료로 검색해 보세요.</p>
@@ -60,7 +61,7 @@
       <noscript>상품 목록을 보려면 브라우저에서 JavaScript를 켜 주세요.</noscript>
     </section>
 
-    <section class="criteria" id="criteria" aria-labelledby="criteria-title">
+    <section class="wrap criteria" id="criteria" aria-labelledby="criteria-title">
       <div>
         <h2 id="criteria-title">원산지 확인 기준</h2>
       </div>
@@ -74,13 +75,13 @@
   </main>
 
   <footer class="site-footer">
-    <div class="wrap footer-inner"><span>착한 음식 아카이브</span><span>상품 사진 제공: 쿠팡 파트너스 · 상단과 분류 이미지는 AI로 연출했습니다.</span></div>
+    <div class="wrap footer-inner"><span>착한 음식 아카이브</span><span>상품 사진 제공: 쿠팡 파트너스</span></div>
   </footer>
 
   <dialog id="details" aria-labelledby="detail-title">
     <div class="dialog-inner">
       <div class="dialog-top">
-        <span class="detail-category" id="detail-category"></span>
+        <span>상품 상세</span>
         <form method="dialog"><button class="close" aria-label="상품 상세 닫기" autofocus><span aria-hidden="true">×</span></button></form>
       </div>
       <div id="detail-content"></div>
