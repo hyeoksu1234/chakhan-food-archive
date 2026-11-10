@@ -11,10 +11,19 @@ const dialog = document.querySelector("#details");
 const detail = document.querySelector("#detail-content");
 const pageSize = 12;
 
-const categories = ["전체", "들기름", "참기름", "고춧가루", "깨·가루", "세트"];
-const productCodes = new Map(products.map((item, index) => [
-  item.id, String(index + 1).padStart(2, "0")
-]));
+const categories = [
+  { label: "전체", icon: "grid" },
+  { label: "들기름", image: "perilla-photo.webp" },
+  { label: "참기름", image: "sesame-photo.webp" },
+  { label: "고춧가루", image: "chili-photo.webp" },
+  { label: "깨·가루", image: "seeds-photo.webp" },
+  { label: "세트", icon: "package" }
+];
+
+const categoryPaths = {
+  grid: "M4 4h6v6H4z M14 4h6v6h-6z M4 14h6v6H4z M14 14h6v6h-6z",
+  package: "m4 8 8-4 8 4v8l-8 4-8-4z M4 8l8 4 8-4 M12 12v8 M8 6l8 4"
+};
 
 let category = "전체";
 let visible = pageSize;
@@ -34,7 +43,9 @@ function canonical(text) {
 function makeCard(product) {
   const card = element("article", "", "product-card");
   const meta = element("div", "", "card-meta");
-  meta.append(element("span", product.category), element("span", "기록 " + productCodes.get(product.id), "card-code"));
+  const arrow = element("span", "↗", "card-arrow");
+  arrow.setAttribute("aria-hidden", "true");
+  meta.append(element("span", product.category), arrow);
   const heading = element("h3");
   const button = element("button", product.name, "card-title");
   button.type = "button";
@@ -42,12 +53,10 @@ function makeCard(product) {
   button.setAttribute("aria-haspopup", "dialog");
   heading.append(button);
   const bottom = element("div", "", "card-bottom");
-  const arrow = element("span", "↗", "card-arrow");
-  arrow.setAttribute("aria-hidden", "true");
   const ingredientSummary = product.ingredients.map(([name, , amount]) =>
     product.ingredients.length === 1 ? [name, amount].join(" ") : name
   ).join(" · ");
-  bottom.append(element("strong", ingredientSummary + " · 국산"), arrow);
+  bottom.append(element("span", "원재료"), element("strong", "국산 " + ingredientSummary));
   card.append(meta, heading, element("p", [product.maker, product.size].join(" · "), "card-maker"), bottom);
   return card;
 }
@@ -87,26 +96,55 @@ function showDetail(product) {
     for (const value of ingredient) tr.append(element("td", value));
   }
 
-  document.querySelector("#detail-number").textContent = "기록 " + productCodes.get(product.id) + " / " + product.category;
+  document.querySelector("#detail-category").textContent = product.category;
   const title = element("h2", product.name, "detail-title");
   title.id = "detail-title";
   if (product.category === "세트") table.createCaption().textContent = "함량은 구성품별 표시를 기준으로 합니다.";
   const evidence = element("div", "", "evidence");
-  evidence.append(element("p", product.evidence), element("p", product.source + " 상품정보 · 확인 " + product.checkedAt));
+  evidence.append(
+    element("h3", "확인 근거", "detail-heading"),
+    element("p", product.evidence, "evidence-quote"),
+    element("p", product.source + " 상품정보 · " + product.checkedAt + " 확인", "evidence-meta")
+  );
   const links = element("div", "", "detail-links");
   links.append(makeLink(product.source + "에서 보기", product.url, "primary"));
   for (const purchase of product.purchase ?? []) links.append(makeLink(purchase.label, purchase.url, "outline"));
   detail.replaceChildren(
     title, element("p", [product.maker, product.size].join(" · "), "detail-meta"),
-    element("h3", "원재료와 원산지", "detail-heading"), table, evidence, links,
+    element("h3", "원재료와 원산지", "detail-heading"), table, evidence,
+    element("h3", "구매처", "detail-heading"), links,
     element("p", "가격과 판매 상태는 구매처에서 확인할 수 있습니다.", "link-note")
   );
   dialog.showModal();
   dialog.scrollTop = 0;
 }
 
-for (const label of categories) {
-  const button = element("button", label, "filter");
+function categoryVisual({ image, icon }) {
+  const visual = element("span", "", "filter-visual");
+  visual.setAttribute("aria-hidden", "true");
+  if (image) {
+    const img = document.createElement("img");
+    img.src = "./assets/" + image;
+    img.width = 48;
+    img.height = 48;
+    img.alt = "";
+    visual.append(img);
+  } else {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", categoryPaths[icon]);
+    svg.append(path);
+    visual.append(svg);
+  }
+  return visual;
+}
+
+for (const item of categories) {
+  const { label } = item;
+  const button = element("button", "", "filter");
+  button.append(categoryVisual(item), element("span", label, "filter-label"));
+  button.setAttribute("aria-controls", "products");
   button.type = "button";
   button.setAttribute("aria-pressed", String(label === category));
   button.addEventListener("click", () => {
@@ -122,7 +160,10 @@ query.addEventListener("input", () => {
   visible = pageSize;
   render();
 });
-query.form.addEventListener("submit", event => event.preventDefault());
+query.form.addEventListener("submit", event => {
+  event.preventDefault();
+  document.querySelector("#catalog-title").focus();
+});
 results.addEventListener("click", event => {
   const button = event.target.closest("[data-product]");
   if (button) showDetail(products.find(product => product.id === button.dataset.product));
