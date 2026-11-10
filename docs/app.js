@@ -28,7 +28,7 @@ const categoryPaths = {
   package: "m4 8 8-4 8 4v8l-8 4-8-4z M4 8l8 4 8-4 M12 12v8 M8 6l8 4"
 };
 
-let category = "전체";
+let category = "가공식품";
 let visible = pageSize;
 
 function element(tag, content, className) {
@@ -51,6 +51,10 @@ function hasCoupangLink(product) {
   return product.purchase?.some(purchase => purchase.affiliate === "coupang");
 }
 
+function productSize(product) {
+  return product.coupangSize ?? product.size;
+}
+
 function makeCard(product) {
   const card = element("article", "", "product-card");
   const meta = element("div", "", "card-meta");
@@ -63,6 +67,21 @@ function makeCard(product) {
   button.dataset.product = product.id;
   button.setAttribute("aria-haspopup", "dialog");
   heading.append(button);
+  const content = element("div", "", "card-content");
+  content.append(meta, heading, element("p", [product.maker, productSize(product)].join(" · "), "card-maker"));
+  const lead = element("div", "", "card-lead");
+  if (product.thumbnail) {
+    const image = element("img", "", "card-thumbnail");
+    image.alt = "";
+    image.width = 212;
+    image.height = 212;
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.addEventListener("error", () => image.remove(), { once: true });
+    image.src = product.thumbnail;
+    lead.append(image);
+  }
+  lead.append(content);
   const bottom = element("div", "", "card-bottom");
   const ingredientSummary = product.ingredients.length > 3
     ? "국산 " + product.ingredients.length + "종"
@@ -70,7 +89,7 @@ function makeCard(product) {
       product.ingredients.length === 1 && amount ? name + " " + amount : name
     ).join(" · ");
   bottom.append(element("span", "원재료"), element("strong", ingredientSummary));
-  card.append(meta, heading, element("p", [product.maker, product.size].join(" · "), "card-maker"), bottom);
+  card.append(lead, bottom);
   return card;
 }
 
@@ -79,7 +98,7 @@ function render() {
   const matches = products.filter(product => {
     if (category !== "전체" && product.category !== category) return false;
     if (coupangOnly?.checked && !hasCoupangLink(product)) return false;
-    const words = canonical([product.name, product.maker, product.size, categoryLabel(product), ...product.ingredients.flat()].join(" "));
+    const words = canonical([product.name, product.maker, productSize(product), categoryLabel(product), ...product.ingredients.flat()].join(" "));
     return terms.every(term => words.includes(term));
   });
   results.replaceChildren(...matches.slice(0, visible).map(makeCard));
@@ -122,17 +141,21 @@ function showDetail(product) {
   evidence.append(
     element("h3", "확인 근거", "detail-heading"),
     element("p", product.evidence, "evidence-quote"),
-    element("p", product.source + " 상품정보 · " + product.checkedAt + " 확인", "evidence-meta")
+    element("p", product.source + " 상품정보 · " + product.checkedAt + " 확인", "evidence-meta"),
+    makeLink("원재료 표기 원문", product.url, "evidence-link")
   );
   const links = element("div", "", "detail-links");
-  links.append(makeLink(product.source + "에서 보기", product.url, "primary"));
   for (const purchase of purchases) {
-    links.append(makeLink(purchase.label, purchase.url, "outline", purchase.affiliate === "coupang"));
+    links.append(makeLink(purchase.label, purchase.url, links.childElementCount ? "outline" : "primary", purchase.affiliate === "coupang"));
+  }
+  if (!purchases.length || product.source !== "쿠팡") {
+    const sourceLabel = product.coupangSize ? product.source + "에서 " + product.size + " 보기" : product.source + "에서 보기";
+    links.append(makeLink(sourceLabel, product.url, purchases.length ? "outline" : "primary"));
   }
   detail.replaceChildren(
     title,
     ...(hasCoupangLink(product) ? [element("p", "이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.", "affiliate-note")] : []),
-    element("p", [product.maker, product.size].join(" · "), "detail-meta"),
+    element("p", [product.maker, productSize(product)].join(" · "), "detail-meta"),
     element("h3", "원재료와 원산지", "detail-heading"), table, evidence,
     element("h3", "구매처", "detail-heading"), links,
     element("p", "가격과 판매 상태는 구매처에서 확인할 수 있습니다.", "link-note")

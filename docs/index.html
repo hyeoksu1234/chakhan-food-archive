@@ -9,9 +9,9 @@
   <meta property="og:description" content="국산 원재료가 확인된 식품의 라벨과 구매처를 한곳에.">
   <title>착한 음식 아카이브</title>
   <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
-  <link rel="stylesheet" href="./styles.css?v=2">
-  <script src="./products.js?v=2" defer></script>
-  <script src="./app.js?v=2" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=3">
+  <script src="./products.js?v=3" defer></script>
+  <script src="./app.js?v=3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#catalog">상품 목록 바로가기</a>
@@ -31,8 +31,8 @@
   <main class="wrap">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <h1 id="hero-title">국산 재료로 만든<br>식품 찾기</h1>
-        <p class="hero-summary">들기름부터 된장, 국수, 간식까지 원재료표와 구매처를 확인하세요.</p>
+        <h1 id="hero-title">국산 재료로 만든<br>가공식품 찾기</h1>
+        <p class="hero-summary">쿠팡에서 판매하는 가공식품의 원재료표와 구매 옵션을 확인하세요.</p>
         <form class="search" role="search">
           <label for="query" class="sr-only">상품명 또는 원재료 검색</label>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.75"/><path d="m15 15 4 4"/></svg>
@@ -48,10 +48,11 @@
       <div class="section-heading">
         <h2 id="catalog-title" tabindex="-1">상품 둘러보기</h2>
       </div>
+      <p class="catalog-disclosure">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
       <div class="filters" role="group" aria-label="상품 분류" id="filters"></div>
       <div class="catalog-options">
         <p id="count" class="results-count" role="status"></p>
-        <label class="retailer-filter"><input id="coupang-only" type="checkbox" aria-controls="products">쿠팡 상품만 보기</label>
+        <label class="retailer-filter"><input id="coupang-only" type="checkbox" aria-controls="products" checked>쿠팡 상품만 보기</label>
       </div>
       <div id="products" class="product-grid"></div>
       <p id="empty" class="empty" hidden>검색 결과가 없습니다. 다른 상품명이나 원재료로 검색해 보세요.</p>
@@ -73,7 +74,7 @@
   </main>
 
   <footer class="site-footer">
-    <div class="wrap footer-inner"><span>착한 음식 아카이브</span><span>원물과 분류 이미지는 AI로 연출했습니다.</span></div>
+    <div class="wrap footer-inner"><span>착한 음식 아카이브</span><span>상품 사진 제공: 쿠팡 파트너스 · 상단과 분류 이미지는 AI로 연출했습니다.</span></div>
   </footer>
 
   <dialog id="details" aria-labelledby="detail-title">
