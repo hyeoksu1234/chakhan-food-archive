@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440">
+  <defs>
+    <pattern id="grain" width="13" height="13" patternUnits="userSpaceOnUse">
+      <path d="M1 3h1m6 2h1m3 5h1M4 11h1" stroke="#857f69" stroke-width=".5" opacity=".33"/>
+    </pattern>
+    <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(24)">
+      <path d="M0 0v5" stroke="#203e76" stroke-width="1" opacity=".28"/>
+    </pattern>
+    <pattern id="redHatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(32)">
+      <path d="M0 0v4" stroke="#623a31" stroke-width=".9" opacity=".45"/>
+    </pattern>
+    <g id="seed">
+      <path d="M0 5C1-1 6-3 10 0 9 4 5 7 0 5Z" fill="#ebd9a8" stroke="#6e5d40" stroke-width=".8"/>
+      <path d="M2 4 7 1" stroke="#8e7650" stroke-width=".55"/>
+    </g>
+    <g id="leaf">
+      <path d="M0 0C-9-19-33-24-46-44l-2-6 7 2-1-7 7 3 1-7 8 4 3-6 7 5 6-3 4 6 6-3 2 6 6 0 2 7 5 1c8 14 4 33-15 42Z" fill="#75835d" stroke="#43513a" stroke-width="1.4"/>
+      <path d="M0 0c-8-21-21-37-44-49M-5-12l8-31m-14 18-26-7m20-1 0-17m-4 12-16-4m33 27 15-16" fill="none" stroke="#43513a" stroke-width="1.1" stroke-linecap="round"/>
+    </g>
+  </defs>
+  <path fill="#e9e5d6" d="M0 0h640v440H0z"/>
+  <path fill="url(#grain)" d="M0 0h640v440H0z"/>
+  <g fill="none" stroke="#8f8d78" stroke-width=".8">
+    <path d="M25 27h20m-20 0v20m570-20h20m0 0v20M25 393v20h20m550 0h20v-20"/>
+    <path d="M45 361c72 5 115 0 153 2m201 8c49-2 114 1 171-4m-501 8c26-1 47 1 70 0m309 9h98" opacity=".4"/>
+    <path d="M44 64h49m-49 7h26m482 305h45m-22 8h22" opacity=".55"/>
+  </g>
+  <g transform="rotate(-12 200 217)" stroke-linejoin="round">
+    <path d="M148 296c22-61 40-121 21-185-6-20-14-34-27-49" fill="none" stroke="#48563c" stroke-width="2.6"/>
+    <use href="#leaf" transform="translate(170 124) rotate(-18) scale(1.06)"/>
+    <use href="#leaf" transform="translate(173 150) rotate(77) scale(.98)"/>
+    <use href="#leaf" transform="translate(170 188) rotate(-30) scale(1.28)"/>
+    <use href="#leaf" transform="translate(160 227) rotate(70) scale(1.05)"/>
+    <use href="#leaf" transform="translate(148 260) rotate(-38) scale(.77)"/>
+  </g>
+  <g transform="rotate(-8 312 219)" stroke="#26364b" stroke-width="1.8" stroke-linejoin="round">
+    <path d="M288 82h41v47c0 20 8 27 24 42 10 10 15 20 15 36v126c0 18-9 24-23 25h-75c-13-1-23-8-23-25V207c0-16 5-26 15-36 16-15 26-22 26-42Z" fill="#c9984d"/>
+    <path d="M289 84h39v39h-39Z" fill="#b9a575"/>
+    <path d="M284 66q0-5 5-5h40q5 0 5 5v24h-50Z" fill="#324970"/>
+    <path d="M289 64v22m6-22v22m6-22v22m7-22v22m7-22v22m7-22v22m7-22v22" fill="none" stroke="#a7aeb0" stroke-width=".7"/>
+    <path d="M251 200c2-15 8-22 21-34 14-12 22-25 22-43m-40 212c0 7 5 14 14 16m91-7 3-17V212c0-16-6-26-16-36" fill="none" stroke="#f0cd7f" stroke-width="3" opacity=".8"/>
+    <path d="M251 217h113v107H251Z" fill="#f2ecd8"/>
+    <path d="M259 225h96v91h-96z" fill="none" stroke="#203e76" stroke-width="1"/>
+    <path d="M307 292c-3-15-15-24-28-29m28 29c5-17 17-28 27-35" fill="none" stroke="#203e76" stroke-width="2" stroke-linecap="round"/>
+    <path d="M303 280c-14 1-23-6-24-17 13-1 24 6 24 17Zm8-4c-3-13 8-23 23-19-3 12-11 19-23 19Z" fill="url(#hatch)" stroke="#203e76"/>
+    <path d="M276 302h61m-56 4h51" fill="none" stroke="#203e76" stroke-width=".8"/>
+  </g>
+  <g transform="rotate(10 458 228)" stroke-linejoin="round">
+    <path d="M427 112c35 2 70 29 69 73-2 49-27 82-68 106-25 14-48 21-74 23 23-12 44-27 59-48 25-35 30-70 13-103-10-17-16-34 1-51Z" fill="#aa5949" stroke="#623a31" stroke-width="1.7"/>
+    <path d="M435 120c30 15 45 31 45 62 0 54-39 97-90 119 41-28 69-64 76-103 6-34-8-56-31-78Z" fill="url(#redHatch)"/>
+    <path d="M429 117c8 4 14 10 21 12-3-6-4-10 3-11-9-1-15-5-20-9-2-14-8-24-24-28l-1 6c9 2 14 9 16 22-7 1-10 6-13 13 7-3 13-6 18-5Z" fill="#6f7850" stroke="#4b5034" stroke-width="1.4"/>
+    <path d="M451 143c13 19 18 42 11 64m-10 22c-8 16-17 27-26 37" fill="none" stroke="#e49a79" stroke-width="1.8" opacity=".75"/>
+  </g>
+  <g stroke="#203e76" stroke-width="1.6">
+    <path d="M96 328h139l-9 12c-13 17-32 26-61 26s-49-9-61-26Z" fill="#e5dbc0"/>
+    <path d="M104 335c28 17 100 17 123 0l-6 10c-31 15-86 15-113 0Z" fill="url(#hatch)" stroke="none"/>
+    <ellipse cx="165.5" cy="326" rx="69.5" ry="17" fill="#e8d5a1"/>
+    <path d="M108 326c22-12 92-15 115-1" fill="none" stroke="#94784b" stroke-width=".9"/>
+  </g>
+  <g>
+    <use href="#seed" transform="translate(125 320) rotate(17)"/><use href="#seed" transform="translate(137 326) rotate(-22)"/>
+    <use href="#seed" transform="translate(151 316) rotate(24)"/><use href="#seed" transform="translate(165 327) rotate(-16)"/>
+    <use href="#seed" transform="translate(178 318) rotate(-22)"/><use href="#seed" transform="translate(188 327) rotate(24)"/>
+    <use href="#seed" transform="translate(205 322) rotate(8)"/><use href="#seed" transform="translate(115 327) rotate(4)"/>
+    <use href="#seed" transform="translate(150 330) rotate(-14)"/><use href="#seed" transform="translate(199 331) rotate(-14)"/>
+    <use href="#seed" transform="translate(387 355) rotate(26)"/><use href="#seed" transform="translate(411 343) rotate(-20)"/>
+    <use href="#seed" transform="translate(428 362) rotate(11)"/><use href="#seed" transform="translate(444 348) rotate(30)"/>
+  </g>
+</svg>
