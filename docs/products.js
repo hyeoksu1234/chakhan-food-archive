@@ -93,7 +93,8 @@ window.catalogProducts = [
     "purchase": [
       {
         "label": "쿠팡 상품 보기",
-        "url": "https://www.coupang.com/vp/products/8514973861"
+        "url": "https://link.coupang.com/a/iyM5KkHF2y",
+        "affiliate": "coupang"
       }
     ]
   },

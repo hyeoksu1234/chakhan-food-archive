@@ -82,15 +82,17 @@ function render() {
   more.hidden = visible >= matches.length;
 }
 
-function makeLink(label, href, className) {
+function makeLink(label, href, className, sponsored = false) {
   const link = element("a", label + " ↗", className);
   link.href = href;
   link.target = "_blank";
-  link.rel = "noopener noreferrer";
+  link.rel = sponsored ? "noopener noreferrer sponsored" : "noopener noreferrer";
   return link;
 }
 
 function showDetail(product) {
+  const purchases = product.purchase ?? [];
+  const hasCoupangPartnersLink = purchases.some(purchase => purchase.affiliate === "coupang");
   const table = element("table", "", "detail-table");
   const header = table.createTHead().insertRow();
   for (const label of ["원재료", "원산지", "표시 함량"]) {
@@ -116,9 +118,13 @@ function showDetail(product) {
   );
   const links = element("div", "", "detail-links");
   links.append(makeLink(product.source + "에서 보기", product.url, "primary"));
-  for (const purchase of product.purchase ?? []) links.append(makeLink(purchase.label, purchase.url, "outline"));
+  for (const purchase of purchases) {
+    links.append(makeLink(purchase.label, purchase.url, "outline", purchase.affiliate === "coupang"));
+  }
   detail.replaceChildren(
-    title, element("p", [product.maker, product.size].join(" · "), "detail-meta"),
+    title,
+    ...(hasCoupangPartnersLink ? [element("p", "이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.", "affiliate-note")] : []),
+    element("p", [product.maker, product.size].join(" · "), "detail-meta"),
     element("h3", "원재료와 원산지", "detail-heading"), table, evidence,
     element("h3", "구매처", "detail-heading"), links,
     element("p", "가격과 판매 상태는 구매처에서 확인할 수 있습니다.", "link-note")

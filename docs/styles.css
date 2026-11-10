@@ -103,6 +103,7 @@ dialog::backdrop { background: #15251c86; }
 .close { display: grid; place-items: center; width: 44px; height: 44px; background: var(--soft); border: 1px solid transparent; border-radius: 8px; font-size: 26px; line-height: 1; color: var(--accent); }
 .close:hover { border-color: var(--accent); }
 .detail-title { font-size: clamp(28px, 5vw, 36px); margin: 4px 0 6px; overflow-wrap: anywhere; }
+.affiliate-note { margin: 0 0 8px; font-size: 14px; line-height: 1.5; }
 .detail-meta { color: var(--muted); margin: 0 0 20px; font-size: 14px; }
 .detail-heading { margin: 0 0 8px; font-size: 15px; }
 .detail-table { border-collapse: collapse; width: 100%; text-align: left; margin-bottom: 16px; font-size: 14px; }
