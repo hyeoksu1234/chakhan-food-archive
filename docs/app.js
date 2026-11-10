@@ -118,8 +118,35 @@ function makeLink(label, href, className, sponsored = false) {
   return link;
 }
 
+function coupangCopyControls(url) {
+  const button = element("button", "쿠팡 링크 복사", "outline");
+  button.type = "button";
+  const address = element("input", "", "copy-address");
+  address.type = "url";
+  address.value = url;
+  address.readOnly = true;
+  address.hidden = true;
+  address.setAttribute("aria-label", "쿠팡 구매 링크");
+  const status = element("p", "", "copy-status");
+  status.setAttribute("role", "status");
+  button.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      address.hidden = true;
+      status.textContent = "복사했습니다. 다른 브라우저의 주소창에 붙여 넣으세요.";
+    } catch {
+      address.hidden = false;
+      address.focus();
+      address.select();
+      status.textContent = "선택된 주소를 복사해 다른 브라우저에서 열어 주세요.";
+    }
+  });
+  return { button, address, status };
+}
+
 function showDetail(product) {
   const purchases = product.purchase ?? [];
+  const coupangPurchase = purchases.find(purchase => purchase.affiliate === "coupang");
   const table = element("table", "", "detail-table");
   const header = table.createTHead().insertRow();
   for (const label of ["원재료", "원산지", "표시 함량"]) {
@@ -148,16 +175,19 @@ function showDetail(product) {
   for (const purchase of purchases) {
     links.append(makeLink(purchase.label, purchase.url, links.childElementCount ? "outline" : "primary", purchase.affiliate === "coupang"));
   }
+  const copy = coupangPurchase ? coupangCopyControls(coupangPurchase.url) : null;
+  if (copy) links.append(copy.button);
   if (!purchases.length || product.source !== "쿠팡") {
     const sourceLabel = product.coupangSize ? product.source + "에서 " + product.size + " 보기" : product.source + "에서 보기";
     links.append(makeLink(sourceLabel, product.url, purchases.length ? "outline" : "primary"));
   }
   detail.replaceChildren(
     title,
-    ...(hasCoupangLink(product) ? [element("p", "이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.", "affiliate-note")] : []),
+    ...(coupangPurchase ? [element("p", "이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.", "affiliate-note")] : []),
     element("p", [product.maker, productSize(product)].join(" · "), "detail-meta"),
     element("h3", "원재료와 원산지", "detail-heading"), table, evidence,
     element("h3", "구매처", "detail-heading"), links,
+    ...(copy ? [element("p", "앱 안에서 쿠팡이 열리지 않으면 링크를 복사해 웹 브라우저에서 열어 보세요.", "link-note"), copy.address, copy.status] : []),
     element("p", "가격과 판매 상태는 구매처에서 확인할 수 있습니다.", "link-note")
   );
   dialog.showModal();

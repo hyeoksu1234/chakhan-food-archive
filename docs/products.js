@@ -102,8 +102,8 @@ window.catalogProducts = [
     "checkedAt": "2026.11.10",
     "purchase": [
       {
-        "label": "쿠팡 상품 보기",
-        "url": "https://link.coupang.com/a/iyM5KkHF2y",
+        "label": "쿠팡에서 180mL 보기",
+        "url": "https://link.coupang.com/a/iyPxpshCjA",
         "affiliate": "coupang"
       }
     ]
