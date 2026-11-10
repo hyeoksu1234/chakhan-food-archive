@@ -1,5 +1,262 @@
 window.catalogProducts = [
   {
+    "id": "cp7748460732",
+    "name": "서울우유 나 100% 우유",
+    "category": "가공식품",
+    "kind": "우유",
+    "maker": "서울우유협동조합",
+    "size": "1 L × 2개",
+    "ingredients": [
+      [
+        "원유",
+        "국산",
+        "100%"
+      ]
+    ],
+    "evidence": "1L 제품의 원재료 표기에 국산 원유 100%로 나와 있습니다.",
+    "source": "SSG.COM",
+    "url": "https://m.ssg.com/item/itemView.ssg?itemId=0000007050044",
+    "checkedAt": "2026.11.10",
+    "thumbnail": "https://t1c.coupangcdn.com/thumbnails/remote/212x212ex/image/retail/images/1343362878923216-460e6d04-61e9-405e-9f08-4c7e80dcdacf.png",
+    "coupangListing": "https://www.coupang.com/vp/products/7748460732?itemId=21053182469&vendorItemId=88115663473",
+    "purchase": [
+      {
+        "label": "쿠팡에서 보기",
+        "url": "https://link.coupang.com/a/iyP3ME2YRE",
+        "affiliate": "coupang"
+      }
+    ]
+  },
+  {
+    "id": "cp5829376509",
+    "name": "양반 100밥 흑미밥",
+    "category": "가공식품",
+    "kind": "즉석밥",
+    "maker": "동원F&B",
+    "size": "130 g × 24개",
+    "ingredients": [
+      [
+        "멥쌀",
+        "국산",
+        "90%"
+      ],
+      [
+        "흑미",
+        "국산",
+        "10%"
+      ]
+    ],
+    "evidence": "동원몰의 130g × 24개 제품 원재료표에 멥쌀과 흑미가 모두 국산으로 표시돼 있습니다.",
+    "source": "동원몰",
+    "url": "https://www.dongwonmall.com/product/detail_deal.do?productId=004025776",
+    "checkedAt": "2026.11.10",
+    "thumbnail": "https://t4c.coupangcdn.com/thumbnails/remote/212x212ex/image/retail/images/1077967055036025-dd346ce9-4075-441b-9f63-aa5c61385d8a.jpg",
+    "coupangListing": "https://www.coupang.com/vp/products/5829376509?itemId=10083400706&vendorItemId=77366282644",
+    "purchase": [
+      {
+        "label": "쿠팡에서 보기",
+        "url": "https://link.coupang.com/a/iyP0a5iBB6",
+        "affiliate": "coupang"
+      }
+    ]
+  },
+  {
+    "id": "cp9335368287",
+    "name": "아이배냇 유기농 쌀떡뻥 백미",
+    "category": "가공식품",
+    "kind": "간식",
+    "maker": "아이배냇",
+    "size": "30 g × 2봉",
+    "ingredients": [
+      [
+        "유기농 백미",
+        "국산",
+        "100%"
+      ]
+    ],
+    "evidence": "백미 옵션의 30g 상품 라벨에 유기농 백미(국산) 100%로 표시돼 있습니다.",
+    "source": "쿠팡",
+    "url": "https://www.coupang.com/vp/products/9335368287?itemId=18036364342&vendorItemId=85190806941",
+    "checkedAt": "2026.11.10",
+    "thumbnail": "https://thumbnail6.coupangcdn.com/thumbnails/remote/212x212ex/image/retail/images/99814111207271-4fcf6f27-c982-48a8-b255-811d53bd9e56.jpg",
+    "coupangListing": "https://www.coupang.com/vp/products/9335368287?itemId=18036364342&vendorItemId=85190806941",
+    "purchase": [
+      {
+        "label": "쿠팡에서 보기",
+        "url": "https://link.coupang.com/a/iyP3H8jHdQ",
+        "affiliate": "coupang"
+      }
+    ]
+  },
+  {
+    "id": "cp119465439",
+    "name": "상하목장 유기농 우유",
+    "category": "가공식품",
+    "kind": "우유",
+    "maker": "매일유업",
+    "size": "125 mL × 24팩",
+    "ingredients": [
+      [
+        "유기농 원유",
+        "국산",
+        "100%"
+      ]
+    ],
+    "evidence": "상하농원의 125mL × 24팩 상품정보에 유기농 원유 100%(국산)로 표시돼 있습니다.",
+    "source": "상하농원",
+    "url": "https://www.sanghafarm.co.kr/product/detail.jsp?pid=A0000081",
+    "checkedAt": "2026.11.10",
+    "thumbnail": "https://thumbnail11.coupangcdn.com/thumbnails/remote/212x212ex/image/vendor_inventory/7f68/5a13cfee4edbd49b0942a1c658bfdee619baba7f7e1f434d398d69930c1d.png",
+    "coupangListing": "https://www.coupang.com/vp/products/119465439?itemId=17708983309&vendorItemId=95710674719",
+    "purchase": [
+      {
+        "label": "쿠팡에서 보기",
+        "url": "https://link.coupang.com/a/iyPZ4rd51o",
+        "affiliate": "coupang"
+      }
+    ]
+  },
+  {
+    "id": "cp7074819651",
+    "name": "밥심 국산 쌀누룽지",
+    "category": "가공식품",
+    "kind": "누룽지",
+    "maker": "오성푸드",
+    "size": "150 g × 2봉",
+    "ingredients": [
+      [
+        "쌀",
+        "국산",
+        "100%"
+      ]
+    ],
+    "evidence": "쿠팡 상세의 150g 제품 표시사항에 쌀(국산) 100%로 표시돼 있습니다.",
+    "source": "쿠팡",
+    "url": "https://www.coupang.com/vp/products/7074819651?itemId=25631108432&vendorItemId=92621248207",
+    "checkedAt": "2026.11.10",
+    "thumbnail": "https://t1c.coupangcdn.com/thumbnails/remote/212x212ex/image/retail/images/35237159776142-a7c9ac10-2db5-4494-b63d-ea0652a8a181.jpg",
+    "coupangListing": "https://www.coupang.com/vp/products/7074819651?itemId=25631108432&vendorItemId=92621248207",
+    "purchase": [
+      {
+        "label": "쿠팡에서 보기",
+        "url": "https://link.coupang.com/a/iyP0p2D7yS",
+        "affiliate": "coupang"
+      }
+    ]
+  },
+  {
+    "id": "cp5938785691",
+    "name": "불로구마 직화 아이스 군고구마",
+    "category": "가공식품",
+    "kind": "냉동 간식",
+    "maker": "온드림푸드",
+    "size": "130 g × 10개",
+    "ingredients": [
+      [
+        "고구마",
+        "국산",
+        "100%"
+      ]
+    ],
+    "evidence": "쿠팡의 130g × 10개 상품 원재료란에 국내산 고구마 100%로 표시돼 있습니다.",
+    "source": "쿠팡",
+    "url": "https://www.coupang.com/vp/products/5938785691?itemId=18050204695&vendorItemId=92195372754",
+    "checkedAt": "2026.11.10",
+    "thumbnail": "https://t2a.coupangcdn.com/thumbnails/remote/212x212ex/image/vendor_inventory/5dd1/d7bd7328091268e7f6a547b652281a2d056839e90e5891ec08abf300876f.jpg",
+    "coupangListing": "https://www.coupang.com/vp/products/5938785691?itemId=18050204695&vendorItemId=92195372754",
+    "purchase": [
+      {
+        "label": "쿠팡에서 보기",
+        "url": "https://link.coupang.com/a/iyP3i6HcYe",
+        "affiliate": "coupang"
+      }
+    ]
+  },
+  {
+    "id": "cp1597422334",
+    "name": "석하 햇 자른다시마",
+    "category": "가공식품",
+    "kind": "건해조류",
+    "maker": "석하",
+    "size": "400 g",
+    "ingredients": [
+      [
+        "완도 다시마",
+        "국산",
+        "100%"
+      ]
+    ],
+    "evidence": "석하 공식몰의 400g 제품 표기에서 완도산 다시마 100%를 확인했습니다.",
+    "source": "석하 공식몰",
+    "url": "https://m.seokhamall.com/product/detail.html?product_no=153",
+    "checkedAt": "2026.11.10",
+    "thumbnail": "https://t1a.coupangcdn.com/thumbnails/remote/212x212ex/image/vendor_inventory/518c/e0218399b7ced6e833ebfe28b735419513ab521db5ad234795f7d20cf083.jpg",
+    "coupangListing": "https://www.coupang.com/vp/products/1597422334?itemId=2729060247&vendorItemId=71027358130",
+    "purchase": [
+      {
+        "label": "쿠팡에서 보기",
+        "url": "https://link.coupang.com/a/iyP0kKNqkm",
+        "affiliate": "coupang"
+      }
+    ]
+  },
+  {
+    "id": "cp6099489386",
+    "name": "제주마루 레드비트즙",
+    "category": "가공식품",
+    "kind": "채소즙",
+    "maker": "재연농원",
+    "size": "100 mL × 50포",
+    "ingredients": [
+      [
+        "제주 레드비트",
+        "국산",
+        "100%"
+      ]
+    ],
+    "evidence": "쿠팡 상품정보에 제주산 레드비트 100%로 표시돼 있습니다.",
+    "source": "쿠팡",
+    "url": "https://www.coupang.com/vp/products/6099489386?itemId=11420983551&vendorItemId=70083483618",
+    "checkedAt": "2026.11.10",
+    "thumbnail": "https://t3c.coupangcdn.com/thumbnails/remote/212x212ex/image/vendor_inventory/5d62/355d73b67c60b518093d07e0ec0bc2b2f4995fd6ba165163fad22266cf23.jpg",
+    "coupangListing": "https://www.coupang.com/vp/products/6099489386?itemId=11420983551&vendorItemId=70083483618",
+    "purchase": [
+      {
+        "label": "쿠팡에서 보기",
+        "url": "https://link.coupang.com/a/iyP3XSudxI",
+        "affiliate": "coupang"
+      }
+    ]
+  },
+  {
+    "id": "cp8773642396",
+    "name": "양반 100% 발아현미밥",
+    "category": "가공식품",
+    "kind": "즉석밥",
+    "maker": "동원F&B",
+    "size": "130 g × 24개",
+    "ingredients": [
+      [
+        "발아현미",
+        "국산",
+        "100%"
+      ]
+    ],
+    "evidence": "동원몰의 같은 130g × 24개 제품 원재료란에는 국산 발아현미만 표시돼 있습니다.",
+    "source": "동원몰",
+    "url": "https://www.dongwonmall.com/product/detail.do?productId=003866038",
+    "checkedAt": "2026.11.10",
+    "thumbnail": "https://thumbnail13.coupangcdn.com/thumbnails/remote/212x212ex/image/retail/images/02264663-e791-4e85-b056-56a547993ae2439321873410393268.png",
+    "coupangListing": "https://www.coupang.com/vp/products/8773642396?itemId=27876949326&vendorItemId=92375862946",
+    "purchase": [
+      {
+        "label": "쿠팡에서 보기",
+        "url": "https://link.coupang.com/a/iyP0fY1oM8",
+        "affiliate": "coupang"
+      }
+    ]
+  },
+  {
     "id": "gs1039230518",
     "name": "온제향가 연잎밥",
     "category": "가공식품",
