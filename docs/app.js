@@ -4,6 +4,7 @@ const products = window.catalogProducts;
 const filters = document.querySelector("#filters");
 const results = document.querySelector("#products");
 const query = document.querySelector("#query");
+const coupangOnly = document.querySelector("#coupang-only");
 const count = document.querySelector("#count");
 const empty = document.querySelector("#empty");
 const more = document.querySelector("#more");
@@ -46,6 +47,10 @@ function categoryLabel(product) {
   return product.kind ? product.category + " · " + product.kind : product.category;
 }
 
+function hasCoupangLink(product) {
+  return product.purchase?.some(purchase => purchase.affiliate === "coupang");
+}
+
 function makeCard(product) {
   const card = element("article", "", "product-card");
   const meta = element("div", "", "card-meta");
@@ -73,12 +78,16 @@ function render() {
   const terms = query.value.trim().split(/\s+/).filter(Boolean).map(canonical);
   const matches = products.filter(product => {
     if (category !== "전체" && product.category !== category) return false;
+    if (coupangOnly?.checked && !hasCoupangLink(product)) return false;
     const words = canonical([product.name, product.maker, product.size, categoryLabel(product), ...product.ingredients.flat()].join(" "));
     return terms.every(term => words.includes(term));
   });
   results.replaceChildren(...matches.slice(0, visible).map(makeCard));
   count.textContent = "상품 " + matches.length + "개";
   empty.hidden = matches.length > 0;
+  empty.textContent = coupangOnly?.checked
+    ? "이 조건에 맞는 쿠팡 상품이 없습니다. 다른 분류를 보거나 쿠팡 필터를 꺼 보세요."
+    : "검색 결과가 없습니다. 다른 상품명이나 원재료로 검색해 보세요.";
   more.hidden = visible >= matches.length;
 }
 
@@ -92,7 +101,6 @@ function makeLink(label, href, className, sponsored = false) {
 
 function showDetail(product) {
   const purchases = product.purchase ?? [];
-  const hasCoupangPartnersLink = purchases.some(purchase => purchase.affiliate === "coupang");
   const table = element("table", "", "detail-table");
   const header = table.createTHead().insertRow();
   for (const label of ["원재료", "원산지", "표시 함량"]) {
@@ -123,7 +131,7 @@ function showDetail(product) {
   }
   detail.replaceChildren(
     title,
-    ...(hasCoupangPartnersLink ? [element("p", "이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.", "affiliate-note")] : []),
+    ...(hasCoupangLink(product) ? [element("p", "이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.", "affiliate-note")] : []),
     element("p", [product.maker, product.size].join(" · "), "detail-meta"),
     element("h3", "원재료와 원산지", "detail-heading"), table, evidence,
     element("h3", "구매처", "detail-heading"), links,
@@ -172,6 +180,10 @@ for (const item of categories) {
 }
 
 query.addEventListener("input", () => {
+  visible = pageSize;
+  render();
+});
+coupangOnly?.addEventListener("change", () => {
   visible = pageSize;
   render();
 });

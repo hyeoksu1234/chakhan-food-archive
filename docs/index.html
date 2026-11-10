@@ -9,9 +9,9 @@
   <meta property="og:description" content="국산 원재료가 확인된 식품의 라벨과 구매처를 한곳에.">
   <title>착한 음식 아카이브</title>
   <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
-  <link rel="stylesheet" href="./styles.css">
-  <script src="./products.js" defer></script>
-  <script src="./app.js" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=2">
+  <script src="./products.js?v=2" defer></script>
+  <script src="./app.js?v=2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#catalog">상품 목록 바로가기</a>
@@ -47,9 +47,12 @@
     <section id="catalog" class="catalog" aria-labelledby="catalog-title">
       <div class="section-heading">
         <h2 id="catalog-title" tabindex="-1">상품 둘러보기</h2>
-        <p id="count" class="results-count" role="status"></p>
       </div>
       <div class="filters" role="group" aria-label="상품 분류" id="filters"></div>
+      <div class="catalog-options">
+        <p id="count" class="results-count" role="status"></p>
+        <label class="retailer-filter"><input id="coupang-only" type="checkbox" aria-controls="products">쿠팡 상품만 보기</label>
+      </div>
       <div id="products" class="product-grid"></div>
       <p id="empty" class="empty" hidden>검색 결과가 없습니다. 다른 상품명이나 원재료로 검색해 보세요.</p>
       <div class="more-wrap"><button type="button" id="more" class="outline" hidden>상품 더 보기 <span aria-hidden="true">↓</span></button></div>

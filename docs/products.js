@@ -71,7 +71,14 @@ window.catalogProducts = [
     "evidence": "상품정보고시에 찹쌀, 연잎, 소금을 비롯한 원재료 12종 모두 국산으로 표시돼 있습니다.",
     "source": "GS SHOP",
     "url": "https://m.gsshop.com/prd/prd.gs?prdid=1039230518",
-    "checkedAt": "2026.11.10"
+    "checkedAt": "2026.11.10",
+    "purchase": [
+      {
+        "label": "쿠팡에서 10팩 보기",
+        "url": "https://link.coupang.com/a/iyNGAnrNOS",
+        "affiliate": "coupang"
+      }
+    ]
   },
   {
     "id": "n35844",
@@ -138,7 +145,14 @@ window.catalogProducts = [
     "evidence": "국산 참깨 100%",
     "source": "홍천남산식품",
     "url": "https://m.nam-san.kr/goods/view?no=35845",
-    "checkedAt": "2026.11.10"
+    "checkedAt": "2026.11.10",
+    "purchase": [
+      {
+        "label": "쿠팡 상품 보기",
+        "url": "https://link.coupang.com/a/iyNsMp4UhM",
+        "affiliate": "coupang"
+      }
+    ]
   },
   {
     "id": "yes129781438",
@@ -162,7 +176,40 @@ window.catalogProducts = [
     "evidence": "밀가루에는 국산 유기농 밀만 사용했고, 천일염도 국산입니다.",
     "source": "예스24",
     "url": "https://www.yes24.com/Product/Goods/129781438",
-    "checkedAt": "2026.11.10"
+    "checkedAt": "2026.11.10",
+    "purchase": [
+      {
+        "label": "쿠팡 상품 보기",
+        "url": "https://link.coupang.com/a/iyNnsHuhqu",
+        "affiliate": "coupang"
+      }
+    ]
+  },
+  {
+    "id": "ssarijai96",
+    "name": "싸리재 유기농 오트밀",
+    "category": "가공식품",
+    "kind": "곡류가공품",
+    "maker": "농업회사법인 콩사랑",
+    "size": "400 g",
+    "ingredients": [
+      [
+        "유기농 귀리",
+        "국산",
+        "100%"
+      ]
+    ],
+    "evidence": "제조사 원재료표에 국산 유기농 귀리 100%로 표시돼 있습니다.",
+    "source": "싸리재마을",
+    "url": "https://m.ssarijai.com/product/zoom.html?product_no=96",
+    "checkedAt": "2026.11.10",
+    "purchase": [
+      {
+        "label": "쿠팡 상품 보기",
+        "url": "https://link.coupang.com/a/iyNIVEG3i0",
+        "affiliate": "coupang"
+      }
+    ]
   },
   {
     "id": "o134990",
@@ -343,7 +390,14 @@ window.catalogProducts = [
     "evidence": "원재료표에 대두와 천일염은 국산으로 표시돼 있습니다. 상품 설명에는 용추골 물을 사용한다고 나와 있습니다.",
     "source": "두레생협",
     "url": "https://www.ecoop.or.kr/DureShop/prod/goodsView.do?returnNo=41672&returnTypeGb=01",
-    "checkedAt": "2026.11.10"
+    "checkedAt": "2026.11.10",
+    "purchase": [
+      {
+        "label": "쿠팡 상품 보기",
+        "url": "https://link.coupang.com/a/iyNt5Nhxfw",
+        "affiliate": "coupang"
+      }
+    ]
   },
   {
     "id": "g1125425056",
@@ -445,7 +499,14 @@ window.catalogProducts = [
     "evidence": "들깨(국내산) 100%",
     "source": "오아시스마켓",
     "url": "https://m.oasis.co.kr/product/detail/59505",
-    "checkedAt": "2026.11.10"
+    "checkedAt": "2026.11.10",
+    "purchase": [
+      {
+        "label": "쿠팡 상품 보기",
+        "url": "https://link.coupang.com/a/iyNF0SLRqC",
+        "affiliate": "coupang"
+      }
+    ]
   },
   {
     "id": "o76208",
@@ -569,7 +630,14 @@ window.catalogProducts = [
     "evidence": "국산 들깨 100%",
     "source": "홍천남산식품",
     "url": "https://m.nam-san.kr/goods/view?no=35596",
-    "checkedAt": "2026.11.10"
+    "checkedAt": "2026.11.10",
+    "purchase": [
+      {
+        "label": "쿠팡 상품 보기",
+        "url": "https://link.coupang.com/a/iyNFrNBHGe",
+        "affiliate": "coupang"
+      }
+    ]
   },
   {
     "id": "o89710",
@@ -713,7 +781,14 @@ window.catalogProducts = [
     "evidence": "들깨 100%(국산)",
     "source": "오아시스마켓",
     "url": "https://m.oasis.co.kr/product/detail/22418-1020643",
-    "checkedAt": "2026.11.10"
+    "checkedAt": "2026.11.10",
+    "purchase": [
+      {
+        "label": "쿠팡에서 180mL 보기",
+        "url": "https://link.coupang.com/a/iyNCKHgb6q",
+        "affiliate": "coupang"
+      }
+    ]
   },
   {
     "id": "o123546",
